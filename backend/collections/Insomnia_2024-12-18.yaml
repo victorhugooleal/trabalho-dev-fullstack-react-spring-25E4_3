@@ -1,0 +1,410 @@
+_type: export
+__export_format: 4
+__export_date: 2024-12-18T12:41:52.150Z
+__export_source: insomnia.desktop.app:v10.2.0
+resources:
+  - _id: req_20bdadf2b9d64648a5758da553b3106e
+    parentId: fld_b7ffa2dcbaac49e580eb91ce33818ebd
+    modified: 1734525447648
+    created: 1734523582991
+    url: "{{server_url}}/api/usuarios/my-profile"
+    name: GetSelfProfile
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+    authentication:
+      type: bearer
+      prefix: Bearer
+      token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBQ01FLkNPTSIsInN1YiI6IjEiLCJleHAiOjE3MzUxMjgzMzUsImlhdCI6MTczNDUxMjczNSwiZW1haWwiOiJ3aWxlQGFjbWUuY29tIn0.HY-9VAqSo1o-P2ufez3YAow-OEUc2LjYGJCWCWQAbqQ5OFse8VvW__s6rkI03xnCnz2zcPiyujxV8p5kM8UQpg
+    metaSortKey: -1734523582991
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_b7ffa2dcbaac49e580eb91ce33818ebd
+    parentId: wrk_5d44256c8de349b6be892fba82b3428f
+    modified: 1732542602988
+    created: 1732542517892
+    name: usuarios
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1732542517892
+    _type: request_group
+  - _id: wrk_5d44256c8de349b6be892fba82b3428f
+    parentId: null
+    modified: 1732544368151
+    created: 1732544368151
+    name: Carros API
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_64b3a0197a374edab4a887b61635fb61
+    parentId: fld_b7ffa2dcbaac49e580eb91ce33818ebd
+    modified: 1734525452940
+    created: 1732542594605
+    url: "{{server_url}}/api/usuarios/login"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "email": "wile@acme.com",
+          "password": "senha123"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/10.1.1
+    authentication: {}
+    metaSortKey: -1732542594605
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6bfb3de7a77b40e5bc5d12f67db3a488
+    parentId: fld_b7ffa2dcbaac49e580eb91ce33818ebd
+    modified: 1734525461233
+    created: 1732542526025
+    url: "{{server_url}}/api/usuarios"
+    name: GetAllUsuarios
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/10.1.1
+    authentication: {}
+    metaSortKey: -1732542526025
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6d993ce2b9fb4a479337b57beedb4e48
+    parentId: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    modified: 1734525469701
+    created: 1734524555083
+    url: "{{server_url}}/api/carros/export-cars"
+    name: export-csv
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+    authentication: {}
+    metaSortKey: -1734524555083
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    parentId: wrk_5d44256c8de349b6be892fba82b3428f
+    modified: 1732542524501
+    created: 1732540900379
+    name: Carros API
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1732540899161
+    preRequestScript: ""
+    afterResponseScript: ""
+    authentication: {}
+    _type: request_group
+  - _id: req_1d7aa1ed56ce4d45a7bbf284bf969bbc
+    parentId: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    modified: 1734525476490
+    created: 1734523692029
+    url: "{{server_url}}/api/carros/search"
+    name: Search
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+        id: pair_3ca0cc4453f844a794eb55e6580072b4
+      - id: pair_64b6a49cd3234b42a03f641e0e0c2dc4
+        name: pais
+        value: Franca
+        description: ""
+        disabled: false
+      - id: pair_1a0e5b1da61b43c48d471be6d2beff5e
+        name: modelo
+        value: passat
+        description: ""
+        disabled: true
+      - id: pair_dcf33917cd23454190599f5ee77f42dc
+        name: fabricante
+        value: Volkswagen
+        description: ""
+        disabled: true
+    authentication: {}
+    metaSortKey: -1734523692029
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1345508c5e22425eb7836de916883a6a
+    parentId: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    modified: 1734525482039
+    created: 1734523642031
+    url: "{{server_url}}/api/carros"
+    name: GetAllPaginados
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+        id: pair_650b4e6c6348448e8c106fb7df798bd9
+      - id: pair_ac77d384211b4f14ba459a19001bd826
+        name: page
+        value: "0"
+        description: ""
+        disabled: false
+      - id: pair_effdacb3223943a2bcb45d2cb1c50669
+        name: size
+        value: "20"
+        description: ""
+        disabled: false
+    authentication: {}
+    metaSortKey: -1734523642031
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2e0bf484bc3b478cb8bb9a9b18af513a
+    parentId: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    modified: 1734525487779
+    created: 1732540900379
+    url: "{{server_url}}/api/carros"
+    name: Obter Todos os Carros
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    preRequestScript: ""
+    metaSortKey: -1732540899160
+    isPrivate: false
+    pathParameters: []
+    afterResponseScript: ""
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9dacc29bab7741ec9b2f88db0e96fcd5
+    parentId: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    modified: 1734525494238
+    created: 1732540900379
+    url: "{{server_url}}/api/carros/1"
+    name: Obter Carro por ID
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    preRequestScript: ""
+    metaSortKey: -1732540899159
+    isPrivate: false
+    pathParameters: []
+    afterResponseScript: ""
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7e8d1fd6fad84d59ae144e91b1fe6e49
+    parentId: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    modified: 1734525500052
+    created: 1732540900380
+    url: "{{server_url}}/api/carros"
+    name: Criar Novo Carro
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "modelo": "Civic",
+          "ano": 2022,
+          "cor": "Prata",
+          "cavalosDePotencia": 180,
+          "fabricante": "Honda",
+          "pais": "Japão"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        description: ""
+    authentication: {}
+    preRequestScript: ""
+    metaSortKey: -1732540899158
+    isPrivate: false
+    pathParameters: []
+    afterResponseScript: ""
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cd58557b5d454dceb1572a42b0b73eac
+    parentId: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    modified: 1734525505207
+    created: 1732540900380
+    url: "{{server_url}}/api/carros/1"
+    name: Atualizar Carro por ID
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "modelo": "Civic",
+          "ano": 2023,
+          "cor": "Preto",
+          "cavalosDePotencia": 200,
+          "fabricante": "Honda",
+          "pais": "Japão"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        description: ""
+    authentication: {}
+    preRequestScript: ""
+    metaSortKey: -1732540899157
+    isPrivate: false
+    pathParameters: []
+    afterResponseScript: ""
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_556da654cc424fc8b2af54ab7e101ad0
+    parentId: fld_ba1e0ef930ac4d35b6786c31f8204b15
+    modified: 1734525511429
+    created: 1732540900380
+    url: "{{server_url}}/api/carros/1"
+    name: Deletar Carro por ID
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    preRequestScript: ""
+    metaSortKey: -1732540899156
+    isPrivate: false
+    pathParameters: []
+    afterResponseScript: ""
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_148aa301f4584661a2e4651a1d7d1fd8
+    parentId: wrk_5d44256c8de349b6be892fba82b3428f
+    modified: 1734525284412
+    created: 1732540903046
+    name: Base Environment
+    data:
+      server_url: http://localhost:8080
+    dataPropertyOrder:
+      "&":
+        - server_url
+    color: null
+    isPrivate: false
+    metaSortKey: 1732540903046
+    _type: environment
+  - _id: jar_358793053dfc45cda3faf599ebe30aa8
+    parentId: wrk_5d44256c8de349b6be892fba82b3428f
+    modified: 1732540903047
+    created: 1732540903047
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: env_fd28266d60ea41c3b36c810334c3200a
+    parentId: env_148aa301f4584661a2e4651a1d7d1fd8
+    modified: 1734525687146
+    created: 1734525221383
+    name: AWS
+    data:
+      server_url: http://52.45.177.208:9041
+      "": ""
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1734525221383
+    environmentType: kv
+    kvPairData:
+      - id: envPair_a120ce3f31a9499e8c801f8b443c091a
+        name: server_url
+        value: http://52.45.177.208:9041
+        type: str
+        enabled: true
+      - id: envPair_e4ce8b11b16e4554a92122a0f9de0fd9
+        name: ""
+        value: ""
+        type: str
+        enabled: true
+    _type: environment
