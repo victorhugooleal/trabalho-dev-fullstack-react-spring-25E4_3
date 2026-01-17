@@ -1,48 +1,255 @@
 # Projeto Fullstack: Spring Boot (backend) + React (frontend)
 
-Este repositório contém a base para o trabalho de pós-graduação: um backend em Spring Boot e um frontend em React. O objetivo é implementar e integrar funcionalidades CRUD, autenticação JWT, exportação de dados e empacotar a aplicação com Docker para entrega.
+Este repositório contém um sistema completo de gerenciamento de carros desenvolvido como trabalho de pós-graduação. O projeto implementa autenticação JWT, CRUD completo, exportação de dados e está pronto para execução com Docker.
 
-Pré-requisitos
-- Docker e Docker Compose instalados na máquina (testado em Windows com PowerShell).
-- Java 17+ (quando executar localmente sem Docker) e Maven (opcional, pois há wrappers).
-- Node.js 16+ (quando executar frontend localmente sem Docker).
+## Tecnologias Utilizadas
 
-Como executar (recomendado: com Docker)
-1. Na raiz do projeto, construa e suba os containers:
+### Backend
+- Java 21
+- Spring Boot 3.4.0
+- Spring Security com JWT
+- Spring Data JPA
+- H2 Database (em memória)
+- Maven
+- BCrypt para hash de senhas
+
+### Frontend
+- React 18
+- React Router DOM
+- Axios
+- CSS puro (responsivo)
+
+### DevOps
+- Docker
+- Docker Compose
+- Nginx (para servir frontend em produção)
+
+## Pré-requisitos
+
+### Para executar com Docker (recomendado)
+- Docker instalado
+- Docker Compose instalado
+
+### Para executar localmente sem Docker
+- Java 21 ou superior
+- Node.js 18 ou superior
+- Maven (opcional, há wrappers incluídos)
+
+## Como executar com Docker (recomendado)
+
+Este é o método mais simples e recomendado para avaliação do professor.
+
+1. Clone o repositório ou extraia o arquivo do projeto
+
+2. Na raiz do projeto, execute:
 
 ```powershell
-docker-compose up --build -d
+docker-compose up --build
 ```
 
-2. Acesse o frontend no navegador (URL e porta serão documentadas assim que o `docker-compose.yml` for adicionado).
+3. Aguarde a construção das imagens e inicialização dos serviços (pode levar alguns minutos na primeira execução)
 
-Execução local (sem Docker)
-- Backend:
+4. Acesse a aplicação:
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8080/api
+   - Console H2: http://localhost:8080/h2-console
+
+5. Para parar os containers:
+
+```powershell
+docker-compose down
+```
+
+## Como executar localmente (desenvolvimento)
+
+### Backend
+
+1. Navegue até a pasta backend:
 
 ```powershell
 cd backend
+```
+
+2. Execute o projeto com Maven:
+
+```powershell
 .\mvnw spring-boot:run
 ```
 
-- Frontend:
+Ou, se preferir compilar primeiro:
+
+```powershell
+.\mvnw clean package
+java -jar target/cars-0.0.1-SNAPSHOT.jar
+```
+
+O backend estará disponível em http://localhost:8080
+
+### Frontend
+
+1. Navegue até a pasta frontend:
 
 ```powershell
 cd frontend
+```
+
+2. Instale as dependências (apenas na primeira vez):
+
+```powershell
 npm install
+```
+
+3. Execute o projeto:
+
+```powershell
 npm start
 ```
 
-Arquivos importantes
-- `.gitignore` — Regras para ignorar artefatos de build, dependências e os arquivos Markdown de entrega conforme solicitado.
-- `ACOMPANHAMENTO_IMPLEMENTACAO.md` — Arquivo de apoio que conterá o plano de implementação, registros de commits e evidências (prints/logs) para gerar o PDF de entrega.
+O frontend abrirá automaticamente em http://localhost:3000
 
-Próximos passos
-- Revisar o backend e implementar endpoints que faltam.
-- Inicializar o frontend React e integrar com os endpoints.
-- Implementar autenticação JWT e exportação de dados.
+## Usuários de Teste
 
-Observação
-- Os arquivos `ENTREGA.md`, `diretrizes_trabalho.md` e `IMPLEMENTACAO.md` estão no `.gitignore` conforme solicitado para não serem incluídos no commit inicial. Garanta que isto esteja conforme as regras da sua instituição antes de subir o repositório final.
+O sistema já vem com usuários pré-cadastrados para testes:
+
+| Email | Senha | Cargo |
+|-------|-------|-------|
+| admin@acme.com | 123456 | Gerente |
+| user@acme.com | 123456 | Vendedor |
+| teste@acme.com | 123456 | Analista |
+
+## Funcionalidades Implementadas
+
+### Autenticação e Segurança
+- Login com email e senha
+- Autenticação JWT
+- Rotas protegidas no frontend
+- Endpoints protegidos no backend
+- Logout seguro
+- Hash de senhas com BCrypt
+
+### CRUD de Carros
+- Listar carros com paginação
+- Buscar carros por modelo, fabricante ou país
+- Criar novo carro
+- Editar carro existente
+- Excluir carro
+- Validações de campos no frontend e backend
+
+### Exportação de Dados
+- Exportar todos os carros em formato CSV
+- Endpoint protegido por autenticação JWT
+
+## Estrutura do Projeto
+
+```
+trabalho-dev-fullstack-react-spring-25E4_3/
+├── backend/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/acme/cars/
+│   │   │   │   ├── config/          # Configurações de segurança e JWT
+│   │   │   │   ├── controller/      # Controllers REST
+│   │   │   │   ├── dto/              # Data Transfer Objects
+│   │   │   │   ├── exception/        # Exceções customizadas
+│   │   │   │   ├── model/            # Entidades JPA
+│   │   │   │   ├── payload/          # Payloads de requisição
+│   │   │   │   ├── repository/       # Repositórios JPA
+│   │   │   │   └── service/          # Serviços de negócio
+│   │   │   └── resources/
+│   │   │       ├── application.yaml  # Configurações do Spring
+│   │   │       └── data.sql          # Dados iniciais
+│   │   └── test/
+│   ├── Dockerfile
+│   └── pom.xml
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/          # Componentes reutilizáveis
+│   │   ├── pages/               # Páginas da aplicação
+│   │   ├── services/            # Serviços de API
+│   │   ├── App.js               # Componente principal e rotas
+│   │   └── index.js             # Entry point
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   └── package.json
+├── docker-compose.yml
+├── .gitignore
+└── README.md
+```
+
+## Endpoints da API
+
+### Autenticação
+- `POST /api/usuarios/login` - Login (público)
+- `GET /api/usuarios/my-profile` - Perfil do usuário (protegido)
+
+### Carros
+- `GET /api/carros` - Listar carros com paginação (público)
+- `GET /api/carros/{id}` - Buscar carro por ID (público)
+- `GET /api/carros/search` - Buscar carros com filtros (público)
+- `POST /api/carros` - Criar carro (protegido)
+- `PUT /api/carros/{id}` - Atualizar carro (protegido)
+- `DELETE /api/carros/{id}` - Excluir carro (protegido)
+- `GET /api/carros/export-cars` - Exportar CSV (protegido)
+
+## Validações Implementadas
+
+### Backend
+- Campos obrigatórios (modelo, cor, fabricante, país)
+- Ano entre 1886 e 2030
+- Potência entre 50 e 2000 HP
+- Email válido e único
+- Tamanho mínimo e máximo de strings
+
+### Frontend
+- Validação de campos obrigatórios
+- Validação de formato de email
+- Validação de ranges numéricos
+- Feedback visual de erros
+
+## Troubleshooting
+
+### Porta já em uso
+Se as portas 3000 ou 8080 já estiverem em uso, você pode:
+
+1. Parar o serviço que está usando a porta
+2. Ou modificar as portas no docker-compose.yml
+
+### Erro de permissão no Maven
+No Windows, se houver erro de permissão:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+### Containers não inicializam
+Verifique os logs:
+
+```powershell
+docker-compose logs backend
+docker-compose logs frontend
+```
+
+## Observações Importantes
+
+- O banco de dados H2 é em memória, então os dados são perdidos ao reiniciar o backend
+- Os dados iniciais (130 carros e 3 usuários) são carregados automaticamente do data.sql
+- O frontend usa localStorage para armazenar o token JWT
+- As senhas são armazenadas com hash BCrypt no banco de dados
+- CORS está habilitado para desenvolvimento
+
+## Commits e Versionamento
+
+O projeto foi desenvolvido de forma incremental com commits bem descritos:
+
+1. Estrutura base do projeto
+2. Implementação de validações e segurança no backend
+3. Implementação do frontend React completo
+4. Configuração Docker para deploy
+
+## Autor
+
+Desenvolvido como trabalho de pós-graduação em Desenvolvimento Fullstack.
 # Sistema de Gerenciamento de Carros
 
 Sistema full-stack desenvolvido com Spring Boot e React para gerenciamento de cadastro de carros, com autenticacao JWT e funcionalidades completas de CRUD.
