@@ -3,12 +3,7 @@ import api from './api';
 export const carroService = {
   getAll: async (page = 0, size = 10) => {
     try {
-      const response = await api.get('/carros', {
-        headers: {
-          page: page.toString(),
-          size: size.toString(),
-        },
-      });
+      const response = await api.get(`/carros?page=${page}&size=${size}`);
       const totalCount = response.headers['x-total-count'];
       return {
         carros: response.data,

@@ -11,6 +11,7 @@ function CarrosList() {
   const [page, setPage] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [search, setSearch] = useState({ modelo: '', fabricante: '', pais: '' });
+  const [isSearchActive, setIsSearchActive] = useState(false);
   const navigate = useNavigate();
   const pageSize = 10;
 
@@ -24,6 +25,7 @@ function CarrosList() {
       const result = await carroService.getAll(page, pageSize);
       setCarros(result.carros);
       setTotalCount(result.totalCount);
+      setIsSearchActive(false);
       setError('');
     } catch (err) {
       setError('Erro ao carregar carros');
@@ -36,12 +38,15 @@ function CarrosList() {
     e.preventDefault();
     try {
       setLoading(true);
+      setPage(0);
       const result = await carroService.search(
         search.modelo,
         search.fabricante,
         search.pais
       );
       setCarros(result);
+      setTotalCount(result.length);
+      setIsSearchActive(true);
       setError('');
     } catch (err) {
       setError('Erro ao buscar carros');
@@ -57,10 +62,21 @@ function CarrosList() {
 
     try {
       await carroService.delete(id);
-      loadCarros();
+      if (isSearchActive) {
+        handleSearch({ preventDefault: () => {} });
+      } else {
+        loadCarros();
+      }
     } catch (err) {
       setError('Erro ao excluir carro');
     }
+  };
+
+  const handleClearSearch = () => {
+    setSearch({ modelo: '', fabricante: '', pais: '' });
+    setPage(0);
+    setIsSearchActive(false);
+    loadCarros();
   };
 
   const handleExport = async () => {
@@ -112,7 +128,7 @@ function CarrosList() {
               onChange={(e) => setSearch({ ...search, pais: e.target.value })}
             />
             <button type="submit" className="btn-search">Buscar</button>
-            <button type="button" onClick={loadCarros} className="btn-clear">Limpar</button>
+            <button type="button" onClick={handleClearSearch} className="btn-clear">Limpar</button>
           </form>
         </div>
 
@@ -179,7 +195,7 @@ function CarrosList() {
               </tbody>
             </table>
 
-            {totalPages > 1 && (
+            {totalPages > 1 && !isSearchActive && (
               <div className="pagination">
                 <button
                   onClick={() => setPage(page - 1)}

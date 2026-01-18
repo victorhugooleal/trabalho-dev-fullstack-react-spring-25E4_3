@@ -14,7 +14,7 @@ import java.util.Optional;
 public class SecurityService {
     private final UsuarioService usuarioService;
     private final TokenService tokenService;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder passwordEncoder;
     
     public String authenticate(AuthUserDTO authUserDTO) throws AuthenticationException {
         Optional<Usuario> byEmail = usuarioService.findByEmail(authUserDTO.email());

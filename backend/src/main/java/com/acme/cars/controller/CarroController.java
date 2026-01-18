@@ -38,12 +38,12 @@ public class CarroController {
         return ResponseEntity.ok(search);
     }
     @GetMapping
-    public ResponseEntity<List<Carro>> listarTodos(@RequestHeader(value = "page", defaultValue = "0") String page,
-                                                   @RequestHeader(value = "size", defaultValue = "10") String size) {
+    public ResponseEntity<List<Carro>> listarTodos(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                   @RequestParam(value = "size", defaultValue = "10") int size) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-Total-Count", String.valueOf(carroService.count()));
-        List<Carro> allCarros = carroService.getAllPaginado(Integer.parseInt(page), Integer.parseInt(size));
-        return ResponseEntity.ok(allCarros);
+        List<Carro> allCarros = carroService.getAllPaginado(page, size);
+        return ResponseEntity.ok().headers(headers).body(allCarros);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Carro> buscarPorId(@PathVariable Long id) {

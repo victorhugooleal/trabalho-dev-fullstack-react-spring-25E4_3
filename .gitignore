@@ -35,6 +35,7 @@ docker-compose.override.yml
 # Ignore the delivery and guideline markdown files as requested
 ENTREGA.md
 diretrizes_trabalho.md
+COMO_TESTAR.md
 IMPLEMENTACAO.md
 ACOMPANHAMENTO_IMPLEMENTACAO.md
 # Arquivos do Sistema Operacional

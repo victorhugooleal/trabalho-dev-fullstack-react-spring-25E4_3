@@ -1,9 +1,9 @@
 -- Inserir usuarios de teste
 -- Senha para todos: 123456 (hash BCrypt)
 INSERT INTO usuario (email, nome, cargo, avatar, password) VALUES
-('admin@acme.com', 'Administrador', 'Gerente', 'https://i.pravatar.cc/150?img=1', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy'),
-('user@acme.com', 'Usuario Comum', 'Vendedor', 'https://i.pravatar.cc/150?img=2', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy'),
-('teste@acme.com', 'Usuario Teste', 'Analista', 'https://i.pravatar.cc/150?img=3', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy');
+('admin@acme.com', 'Administrador', 'Gerente', 'https://i.pravatar.cc/150?img=1', '$2a$10$7zzQh3Qk3C9OL3hGeDNdDO76FxFfftUbwXJoifEwCbx/RATgfC3DW'),
+('user@acme.com', 'Usuario Comum', 'Vendedor', 'https://i.pravatar.cc/150?img=2', '$2a$10$7zzQh3Qk3C9OL3hGeDNdDO76FxFfftUbwXJoifEwCbx/RATgfC3DW'),
+('teste@acme.com', 'Usuario Teste', 'Analista', 'https://i.pravatar.cc/150?img=3', '$2a$10$7zzQh3Qk3C9OL3hGeDNdDO76FxFfftUbwXJoifEwCbx/RATgfC3DW');
 
 -- Inserir 130 carros, distribuídos entre 30 fabricantes (assumindo que os fabricantes com id de 1 a 30 já existem)
 
