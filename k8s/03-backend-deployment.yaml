@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cars-backend
+  namespace: cars-devops
+  labels:
+    app: cars-backend
+spec:
+  # 4 réplicas conforme item 2a da diretriz
+  replicas: 4
+  selector:
+    matchLabels:
+      app: cars-backend
+  template:
+    metadata:
+      labels:
+        app: cars-backend
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+        - name: cars-backend
+          # Substitua SEU_USUARIO pelo seu usuário do Docker Hub
+          image: victorhleal/cars-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "default"
+            - name: JAVA_OPTS
+              value: "-Xms256m -Xmx512m"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          # Liveness Probe: verifica se a aplicação está viva (item 2d da diretriz)
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            failureThreshold: 3
+            timeoutSeconds: 5
+          # Readiness Probe: verifica se a aplicação está pronta para receber tráfego (item 2d da diretriz)
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 75
+            periodSeconds: 10
+            failureThreshold: 3
+            timeoutSeconds: 5

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cars-frontend
+  namespace: cars-devops
+  labels:
+    app: cars-frontend
+spec:
+  # 4 réplicas conforme item 2a da diretriz
+  replicas: 4
+  selector:
+    matchLabels:
+      app: cars-frontend
+  template:
+    metadata:
+      labels:
+        app: cars-frontend
+    spec:
+      containers:
+        - name: cars-frontend
+          # Substitua SEU_USUARIO pelo seu usuário do Docker Hub
+          image: victorhleal/cars-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: REACT_APP_API_URL
+              value: "http://cars-backend-service:8080"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+          # Liveness Probe: verifica se o nginx está vivo (item 2d da diretriz)
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            failureThreshold: 3
+            timeoutSeconds: 5
+          # Readiness Probe: verifica se o frontend está pronto (item 2d da diretriz)
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+            timeoutSeconds: 3
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: frontend-nginx-config

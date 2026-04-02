@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-pvc
+  namespace: cars-devops
+  labels:
+    app: prometheus
+spec:
+  # PVC para persistência dos dados do Prometheus (item 3b da diretriz)
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

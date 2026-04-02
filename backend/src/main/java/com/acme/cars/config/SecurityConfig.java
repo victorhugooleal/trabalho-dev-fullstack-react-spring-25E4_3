@@ -34,6 +34,8 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/carros/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/carros/search").permitAll()
+                // Libera todos os endpoints do Actuator (health probes Kubernetes + Prometheus)
+                .requestMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
             )
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
