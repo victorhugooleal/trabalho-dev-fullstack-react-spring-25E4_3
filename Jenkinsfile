@@ -37,7 +37,7 @@ pipeline {
             steps {
                 echo '☕ Compilando o backend Spring Boot...'
                 dir('backend') {
-                    sh 'mvn clean package -DskipTests -q'
+                    sh 'chmod +x mvnw && ./mvnw clean package -DskipTests -q'
                     sh 'ls -lh target/*.jar'
                 }
             }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 echo '🧪 Executando testes do backend...'
                 dir('backend') {
-                    sh 'mvn test'
+                    sh 'chmod +x mvnw && ./mvnw test'
                 }
             }
             post {
